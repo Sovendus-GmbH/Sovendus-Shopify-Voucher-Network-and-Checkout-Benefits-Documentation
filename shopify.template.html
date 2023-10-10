@@ -1,0 +1,69 @@
+
+<!-- sovendus code begin -->
+<div style="margin-top: 30px" id="sovendus-container-1"></div>
+
+<script type="text/javascript">
+  const sovendusIdsByCountry = {
+    // Make sure to use the right country code and replace source and medium id with the ones we provided
+    DE : {
+        trafficSourceNumber: 'YOUR_SOURCE_ID',
+        trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    },
+    // If you have only one country, you can remove the following lines
+    // AT : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // IT : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // FR : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // UK : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // DK : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // Remove until here
+  }
+  const countryCode = '{{checkout.billing_address.country_code}}'
+  const taxPercent = Number('{% for tax_line in checkout.tax_lines %}{{ tax_line.rate }}{% endfor %}')
+  const grossOrderValue = (Number('{{checkout.total_price}}') - Number('{{checkout.shipping_price}}')) * 0.01
+  if (sovendusIdsByCountry[countryCode]){
+      window.sovIframes = window.sovIframes || [];
+      window.sovIframes.push({
+        trafficSourceNumber: sovendusIdsByCountry[countryCode].trafficSourceNumber,
+        trafficMediumNumber: sovendusIdsByCountry[countryCode].trafficMediumNumber,
+        sessionId: '{{checkout.order_id}}',
+        timestamp: Date.now(),
+        orderId: '{{checkout.order_id}}',
+        orderValue: grossOrderValue - grossOrderValue * taxPercent,
+        orderCurrency: '{{checkout.currency}}',
+        usedCouponCode: '{% for discount_application in checkout.discount_applications %}{{ discount_application.title }}{% endfor %}',
+        iframeContainerId: 'sovendus-container-1',
+      });
+     
+      window.sovConsumer = window.sovConsumer || {};
+      window.sovConsumer = {
+        consumerSalutation: '',
+        consumerFirstName: '{{checkout.billing_address.first_name}}',
+        consumerLastName: '{{checkout.billing_address.last_name}}',
+        consumerEmail: '{{checkout.email}}',
+        consumerCountry: '{{checkout.billing_address.country_code}}',
+        consumerZipcode: '{{checkout.billing_address.zip}}'
+      };
+      
+      var sovDomain = window.location.protocol + '\x2F\x2F' + 'api.sovendus.com';
+      var sovJsFile = sovDomain + '\x2Fsovabo\x2Fcommon\x2Fjs\x2FflexibleIframe.js';
+      document.write('<sc' + 'ript async="true" src="' + sovJsFile + '" type="text/javascript"></sc' +
+        'ript>');
+  }
+ 
+</script>
+<!-- sovendus code end -->
