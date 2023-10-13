@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
   // script version 1.0.0
-  const sovendusIdsByCountry = {
+  var sovendusIdsByCountry = {
     // Make sure to use the right country code and replace source and medium id with the ones we provided
     DE : {
         trafficSourceNumber: 'YOUR_SOURCE_ID',
@@ -33,16 +33,22 @@
     // },
     // Remove until here
   }
-  const countryCode = '{{checkout.billing_address.country_code}}'
-  const taxPercent = Number('{% for tax_line in checkout.tax_lines %}{{ tax_line.rate }}{% endfor %}')
-  const grossOrderValue = (Number('{{checkout.total_price}}') - Number('{{checkout.shipping_price}}')) * 0.01
+  var countryCode = '{{checkout.billing_address.country_code}}'
   if (sovendusIdsByCountry[countryCode]){
+      var taxPercent = Number('{% for tax_line in checkout.tax_lines %}{{ tax_line.rate }}{% endfor %}')
+      var totalPrice = Number('{{checkout.total_price}}')
+      var shippingPrice = Number('{{checkout.shipping_price}}')
+      taxPercent = isNaN(taxPercent) ? 0 : taxPercent
+      totalPrice = isNaN(totalPrice) ? 0 : totalPrice
+      shippingPrice = isNaN(shippingPrice) ? 0 : shippingPrice
+      var grossOrderValue = (totalPrice - shippingPrice) * 0.01
+
       window.sovIframes = window.sovIframes || [];
       window.sovIframes.push({
         trafficSourceNumber: sovendusIdsByCountry[countryCode].trafficSourceNumber,
         trafficMediumNumber: sovendusIdsByCountry[countryCode].trafficMediumNumber,
         sessionId: '{{checkout.order_id}}',
-        timestamp: Date.now(),
+        timestamp: Math.floor(Date.now() / 1000),
         orderId: '{{checkout.order_number}}',
         orderValue: grossOrderValue - grossOrderValue * taxPercent,
         orderCurrency: '{{checkout.currency}}',
