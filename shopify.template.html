@@ -42,7 +42,7 @@
         trafficMediumNumber: sovendusIdsByCountry[countryCode].trafficMediumNumber,
         sessionId: '{{checkout.order_id}}',
         timestamp: Date.now(),
-        orderId: '{{checkout.order_id}}',
+        orderId: '{{checkout.order_number}}',
         orderValue: grossOrderValue - grossOrderValue * taxPercent,
         orderCurrency: '{{checkout.currency}}',
         usedCouponCode: '{% for discount_application in checkout.discount_applications %}{{ discount_application.title }}{% endfor %}',
