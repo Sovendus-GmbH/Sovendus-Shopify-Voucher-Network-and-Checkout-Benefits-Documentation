@@ -3,7 +3,7 @@
 <div style="margin-top: 30px" id="sovendus-container-1"></div>
 
 <script type="text/javascript">
-  // script version 1.0.0
+  // script version 1.0.1
   var sovendusIdsByCountry = {
     // Make sure to use the right country code and replace source and medium id with the ones we provided
     DE : {
@@ -42,15 +42,15 @@
       totalPrice = isNaN(totalPrice) ? 0 : totalPrice
       shippingPrice = isNaN(shippingPrice) ? 0 : shippingPrice
       var grossOrderValue = (totalPrice - shippingPrice) * 0.01
-
+      var netOrderValue = grossOrderValue - grossOrderValue * taxPercent
       window.sovIframes = window.sovIframes || [];
       window.sovIframes.push({
         trafficSourceNumber: sovendusIdsByCountry[countryCode].trafficSourceNumber,
         trafficMediumNumber: sovendusIdsByCountry[countryCode].trafficMediumNumber,
-        sessionId: '{{checkout.order_id}}',
+        sessionId: '{{checkout.order_id}}'+netOrderValue,
         timestamp: Math.floor(Date.now() / 1000),
-        orderId: '{{checkout.order_number}}',
-        orderValue: grossOrderValue - grossOrderValue * taxPercent,
+        orderId: '{{checkout.order_id}}',
+        orderValue: netOrderValue,
         orderCurrency: '{{checkout.currency}}',
         usedCouponCode: '{% for discount_application in checkout.discount_applications %}{{ discount_application.title }}{% endfor %}',
         iframeContainerId: 'sovendus-container-1',
