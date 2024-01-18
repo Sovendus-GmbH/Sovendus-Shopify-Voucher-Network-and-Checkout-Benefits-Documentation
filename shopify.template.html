@@ -2,7 +2,6 @@
 <div style="margin-top: 30px" id="sovendus-container-1"></div>
 
 <script type="text/javascript">
-  // script version 1.0.3
   var sovendusIdsByCountry = {
     // Make sure to use the right country code and replace source and medium id with the ones we provided
     DE: {
@@ -58,6 +57,7 @@
       usedCouponCode:
         "{% for discount_application in checkout.discount_applications %}{{ discount_application.title }}{% endfor %}",
       iframeContainerId: "sovendus-container-1",
+      integrationType: "shopify-1.0.4"
     });
 
     window.sovConsumer = {
