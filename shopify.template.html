@@ -54,10 +54,9 @@
       orderId: "{{checkout.order_id}}",
       orderValue: netOrderValue,
       orderCurrency: "{{checkout.currency}}",
-      usedCouponCode:
-        "{% for discount_application in checkout.discount_applications %}{{ discount_application.title }}{% endfor %}",
+      usedCouponCode: "{{ checkout.discount_applications.first.title }}",
       iframeContainerId: "sovendus-container-1",
-      integrationType: "shopify-1.0.4"
+      integrationType: "shopify-1.1.0",
     });
 
     window.sovConsumer = {
@@ -69,13 +68,13 @@
       consumerZipcode: "{{checkout.billing_address.zip}}",
     };
 
-    var sovDomain = window.location.protocol + "\x2F\x2F" + "api.sovendus.com";
-    var sovJsFile = sovDomain + "\x2Fsovabo\x2Fcommon\x2Fjs\x2FflexibleIframe.js";
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.async = true;
-    script.src = sovJsFile;
-    document.getElementsByTagName("body")[0].appendChild(script);
+    script.src =
+      window.location.protocol +
+      "//api.sovendus.com/sovabo/common/js/flexibleIframe.js";
+    document.body.appendChild(script);
   }
 </script>
 <!-- sovendus code end -->
