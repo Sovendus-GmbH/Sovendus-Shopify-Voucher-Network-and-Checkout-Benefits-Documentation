@@ -9,6 +9,14 @@
       trafficMediumNumber: "YOUR_MEDIUM_ID",
     },
     // If you have only one country, you can remove the following lines
+    // "CH-fr" : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // "CH-de" : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
     // AT : {
     //     trafficSourceNumber: 'YOUR_SOURCE_ID',
     //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
@@ -29,10 +37,30 @@
     //     trafficSourceNumber: 'YOUR_SOURCE_ID',
     //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
     // },
+    // SE : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // PL : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // "BE-nl" : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
+    // "BE-fr" : {
+    //     trafficSourceNumber: 'YOUR_SOURCE_ID',
+    //     trafficMediumNumber: 'YOUR_MEDIUM_ID',
+    // },
     // Remove until here
   };
   var countryCode = "{{checkout.billing_address.country_code}}";
-  if (sovendusIdsByCountry[countryCode]) {
+  const language = document.documentElement.lang.split("-")[0];
+  if (
+    sovendusIdsByCountry[countryCode] ||
+    sovendusIdsByCountry[countryCode + "-" + language]
+  ) {
     var taxPercent = Number(
       "{% for tax_line in checkout.tax_lines %}{{ tax_line.rate }}{% endfor %}"
     );
@@ -61,7 +89,7 @@
       orderCurrency: "{{checkout.currency}}",
       usedCouponCode: couponCode,
       iframeContainerId: "sovendus-container-1",
-      integrationType: "shopify-1.1.1",
+      integrationType: "shopify-1.2.0",
     });
 
     window.sovConsumer = {
