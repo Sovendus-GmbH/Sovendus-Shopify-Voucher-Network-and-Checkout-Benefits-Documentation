@@ -56,10 +56,10 @@
     // Remove until here
   };
   var countryCode = "{{checkout.billing_address.country_code}}";
-  const language = document.documentElement.lang.split("-")[0];
+  const language = document.documentElement.lang?.split("-")?.[0];
   if (
     sovendusIdsByCountry[countryCode] ||
-    sovendusIdsByCountry[countryCode + "-" + language]
+    sovendusIdsByCountry[`${countryCode}-${language}`]
   ) {
     var taxPercent = Number(
       "{% for tax_line in checkout.tax_lines %}{{ tax_line.rate }}{% endfor %}"
@@ -89,7 +89,7 @@
       orderCurrency: "{{checkout.currency}}",
       usedCouponCode: couponCode,
       iframeContainerId: "sovendus-container-1",
-      integrationType: "shopify-1.2.0",
+      integrationType: "shopify-1.2.1",
     });
 
     window.sovConsumer = {
