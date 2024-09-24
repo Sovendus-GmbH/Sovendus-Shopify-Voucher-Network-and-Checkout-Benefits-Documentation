@@ -1,6 +1,12 @@
 # Shopify Sovendus Voucher Network & Checkout Benefits Integration Documentation
 
-## How to check if you are using the new Shopify checkout version
+## This documentation is only for the old Shopify version
+> [!WARNING]
+> The integration only works if you have NOT upgraded your thank you page and order status page to the "Checkout extensibility" version, the [docs for the new version can be found here](https://developer-hub.sovendus.com/Voucher-Network-Checkout-Benefits/Web-Integration/Shopify-App-(new-Version))
+
+### How to check if you are using the new Shopify checkout version
+To check you thank you / order status page version go to "Settings -> Checkout", if you are on the new version it should look like on the screenshot below:
+
 ![New Shopify Checkout Version](https://raw.githubusercontent.com/Sovendus-GmbH/Sovendus-Voucher-Network-and-Checkout-Benefits-App-for-Shopify/main/newShopifyCheckoutVersion.png)
 
 ## Create discount codes in bulk
@@ -10,8 +16,6 @@ You can use for example [Bulk Discounts](https://apps.shopify.com/bulk-discounts
 
 ## Add Sovendus script
 
-> [!WARNING]
-> The integration only works if you have NOT upgraded your thank you page and order status page to the "Checkout extensibility" version, the docs for the new version can be found here [here](https://developer-hub.sovendus.com/Voucher-Network-Checkout-Benefits/Web-Integration/Shopify-App-(new-Version))
 
 1. Copy the Shopify script from [here](https://github.com/Sovendus-GmbH/Sovendus-Shopify-Voucher-Network-and-Checkout-Benefits-Documentation/blob/main/shopify.template.html) and replace YOUR_SOURCE_NUMBER and YOUR_MEDIUM_NUMBER with the one we provide you in your integration documentation. Make sure to use the right country code. If you are using sovendus for multiple countries, make sure you define YOUR_SOURCE_NUMBER and YOUR_MEDIUM_NUMBER in the script as well.
 2. In your Shopify backend go to: Settings -> Checkout -> Order status page -> Additional scripts - paste the script and save it.
