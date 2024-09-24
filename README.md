@@ -1,5 +1,8 @@
 # Shopify Sovendus Voucher Network & Checkout Benefits Integration Documentation
 
+## How to check if you are using the new Shopify checkout version
+![New Shopify Checkout Version](https://raw.githubusercontent.com/Sovendus-GmbH/Sovendus-Voucher-Network-and-Checkout-Benefits-App-for-Shopify/main/newShopifyCheckoutVersion.png)
+
 ## Create discount codes in bulk
 
 If you use the Voucher Network, it's recommended to use a tool to create voucher codes in bulk \
