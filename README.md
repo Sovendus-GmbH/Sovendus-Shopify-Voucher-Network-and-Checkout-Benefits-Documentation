@@ -5,7 +5,7 @@
 > [!WARNING]
 > The integration only works if you have NOT upgraded your thank you page and order status page to the "Checkout extensibility" version, the [docs for the new version can be found here](https://developer-hub.sovendus.com/Voucher-Network-Checkout-Benefits/Web-Integration/Shopify-App-(new-Version))
 
-### How to check if you are using the new Shopify checkout version
+### How to check if you are using the old Shopify checkout version
 
 To check your thank you / order status page version go to "Settings -> Checkout", if you are on the OLD version it should look like on the screenshot below:
 
