@@ -6,7 +6,7 @@
 > The integration only works if you have NOT upgraded your thank you page and order status page to the "Checkout extensibility" version, the [docs for the new version can be found here](https://developer-hub.sovendus.com/Voucher-Network-Checkout-Benefits/Web-Integration/Shopify-App-(new-Version))
 
 > [!WARNING]
-> On August 2025 this integration method will be not supported anymore, make sure to get in touch with us regarding the upgrade process in time!
+> On August 2025 this integration method will be not supported anymore, make sure to follow the steps here to upgrade: [Sovendus Shopify App](https://developer-hub.sovendus.com/Voucher-Network-Checkout-Benefits/Web-Integration/Shopify-App-(new-Version))
 >
 ### How to check if you are using the old Shopify checkout version
 
